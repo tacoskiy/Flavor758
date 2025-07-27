@@ -11,4 +11,5 @@ A Django project created for TechJam named "Flavor758".
 >**Makefile commands**
 >
 >- `make build` - **build container & db** (docker-compose up --build --remove-orphans)
->- `make up` - **boot up container & db** (docker-compose up -d)
+>- `make up` - **start up container & db** (docker-compose up -d)
+>- `make down` - **shut down container & db** (docker-compose down)
