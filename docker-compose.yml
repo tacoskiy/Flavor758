@@ -1,15 +1,27 @@
 services:
   web:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    depends_on:
+      - db
+
+    build: ./django
     volumes:
-      - ./django: /code
+      - ./django:/code
     ports:
       - "8000:8000"
     env_file:
       - .env
-    command: >
-      sh -c"
-        python manage.py migrate &&
-        python manage.py runserver 0.0.0.0:8000
+    restart: always
+
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: "flavor-758-DB"
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASS}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+volumes:
+  postgres_data:
