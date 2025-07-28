@@ -1,0 +1,147 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>HTMLマーカーの追加</title>
+  <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+  <link href="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css" rel="stylesheet" />
+  <link rel="stylesheet" href="{% static "css/app.css" %}">
+  <style>
+    body { margin: 0; padding: 0; }
+    #map { position: absolute; top: 0; bottom: 0; width: 100%; }
+  </style>
+</head>
+<body>
+
+    <div id="map"></div>
+
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js"></script>
+<script>
+    mapboxgl.accessToken = 'pk.eyJ1IjoidGFjb3NraXkiLCJhIjoiY21kbGphbjc1MWNreDJrcHZzMmNmMzdlZyJ9.4Eokpcd4aNhzrWypj9OOfw';
+
+    const map = new mapboxgl.Map({
+        container: 'map',
+        style: {
+            version: 8,
+            name: 'Flavor758 MapStyle',
+            sources: {
+                'composite': {
+                    type: 'vector',
+                    url: 'mapbox://mapbox.mapbox-streets-v8'
+                }
+            },
+            layers: [
+                {
+                id: 'background',
+                type: 'background',
+                paint: {
+                    'background-color': '#292929'
+                }
+                },
+                {
+                    id: 'road',
+                    type: 'line',
+                    source: 'composite',
+                    'source-layer': 'road',
+                    paint: {
+                        'line-color': '#5C5C5C',
+                        'line-width': 5
+                    }
+                },
+                {
+                    id: 'building-fill',
+                    type: 'fill',
+                    source: 'composite',
+                    'source-layer': 'building',
+                    paint: {
+                        'fill-color': '#5C5C5C',
+                        'fill-opacity': 1
+                    }
+                }
+            ]
+        },
+        center: [136.8815, 35.1709],
+        zoom: 17,
+        minZoom: 17,
+        maxZoom: 17,
+        maxBounds: [
+            [136.78, 35.05],
+            [137.03, 35.25]
+        ],
+        pitch: 70,
+        antialias: true,
+    });
+
+    map.on('load', () => {
+        map.addLayer({
+            id: 'sky',
+            type: 'sky',
+            paint: {
+                'sky-type': 'gradient',
+                'sky-gradient-center': [0, 0],
+                'sky-gradient-radius': 90,
+                'sky-gradient': [
+                    'interpolate',
+                    ['linear'],
+                    ['sky-radial-progress'],
+                    0, '#292929',
+                    1, '#292929'
+                ]
+            }
+        });
+        map.addLayer({
+            id: '3d-buildings',
+            source: 'composite',
+            'source-layer': 'building',
+            filter: ['==', 'extrude', 'true'],
+            type: 'fill-extrusion',
+            paint: {
+                'fill-extrusion-color': '#292929',
+                'fill-extrusion-height': ['get', 'height'],
+                'fill-extrusion-base': ['get', 'min_height'],
+                'fill-extrusion-opacity': 1
+            }
+        });
+
+        const markers = [
+            { lng: 136.8796553, lat: 35.16198897 }, //nagoya-sta
+            { lng: 136.9123, lat: 35.0745 },
+            { lng: 136.9578, lat: 35.1029 },
+            { lng: 136.8821, lat: 35.1357 },
+            { lng: 136.9876, lat: 35.1902 },
+            { lng: 136.9044, lat: 35.2278 },
+            { lng: 136.9592, lat: 35.2101 },
+            { lng: 136.9238, lat: 35.0609 },
+            { lng: 136.8890, lat: 35.1187 },
+            { lng: 136.9755, lat: 35.1433 },
+            { lng: 136.9150, lat: 35.1984 },
+            { lng: 136.8812778, lat: 35.168835 } //きしめん
+        ];
+
+        markers.forEach(({lng,lat}) => {
+            const el = document.createElement('div');
+            el.className = 'custom-marker';
+            el.innerHTML = `
+                <div class="content">
+                    <h1>title</h1>
+                    <p>description</p>
+                </div>
+            `;
+
+            new mapboxgl.Marker(el)
+            .setLngLat([lng, lat])
+            .addTo(map); 
+        });
+    });
+
+    map.on('move', () => {
+        const center = map.getCenter();
+        const centerLngLat = [center.lng, center.lat];
+
+
+    });
+</script>
+</body>
+</html>

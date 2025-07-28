@@ -1,21 +1,31 @@
 services:
-  web:
+
+  backend:
     depends_on:
       - db
-
-    build: ./django
+    build: ./backend
     volumes:
-      - ./django:/code
+      - ./backend:/container-backend
     ports:
       - "8000:8000"
     env_file:
       - .env
-    restart: always
+
+  frontend:
+    depends_on:
+      - backend
+    build: ./frontend
+    volumes:
+      - ./frontend:/container-frontend
+    ports:
+      - "3000:3000"
+    env_file:
+      - .env
 
   db:
     image: postgres:15
     environment:
-      POSTGRES_DB: "flavor-758-DB"
+      POSTGRES_DB: ${DB_NAME}
       POSTGRES_USER: ${DB_USER}
       POSTGRES_PASSWORD: ${DB_PASS}
     volumes:
