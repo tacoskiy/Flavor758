@@ -5,7 +5,7 @@ services:
       - db
     build: ./backend
     volumes:
-      - ./backend:/container-backend
+      - ./backend:/container-backend:delegated
     ports:
       - "8000:8000"
     env_file:
@@ -16,7 +16,8 @@ services:
       - backend
     build: ./frontend
     volumes:
-      - ./frontend:/container-frontend
+      - ./frontend:/container-frontend:delegated
+      - /container-frontend/node_modules
     ports:
       - "3000:3000"
     env_file:
