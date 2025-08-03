@@ -1,5 +1,6 @@
 import Image from "next/image";
 import styles from "./page.module.css";
+import 'mapbox-gl/dist/mapbox-gl.css';
 
 export default function Home() {
   return (
