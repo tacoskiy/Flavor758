@@ -10,7 +10,7 @@
 }
 
 .markerContent.shrink{
-    background-color: red;
+    /* background-color: red; */
     width: 64px;
     height: 64px;
 }

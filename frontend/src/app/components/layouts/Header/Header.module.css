@@ -1,0 +1,17 @@
+.appHeader{
+    position: fixed;
+    z-index: 1000;
+    width: 100%;
+    height: auto;
+    padding: 24px;
+}
+
+.mainHeader{
+    width: 100%;
+    height: auto;
+    background-color: var(--white-color);
+    padding: 4px;
+    border-radius: 12px;
+    display: flex;
+    justify-content: space-between;
+}

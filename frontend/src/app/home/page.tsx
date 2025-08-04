@@ -1,10 +1,11 @@
-import MapBox from "../components/MapBox/MapBox";
+import MapBox from "../components/elements/MapBox/MapBox";
+import styles from './page.module.css'
 
 function HomePage(){
     return(
-        <main>
+        <section className={styles.mapSection}>
             <MapBox/>
-        </main>
+        </section>
     );  
 }
 
