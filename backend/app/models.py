@@ -5,9 +5,10 @@ class Shop(models.Model):
     shopName = models.CharField(max_length=255)
     coverImage = models.ImageField(upload_to='images/')
     discription = models.CharField(max_length=500)
+    category = models.CharField(max_length = 100)
 
     def __str__(self):
-        return self.name
+        return self.shopName
 
 class ShopImage(models.Model):
     shop = models.ForeignKey(Shop, on_delete=models.CASCADE, related_name='shopImages')
