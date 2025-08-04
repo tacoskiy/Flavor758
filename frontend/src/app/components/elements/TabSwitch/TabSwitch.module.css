@@ -1,0 +1,26 @@
+.tabSwitch{
+    width: fit-content;
+    height: 48px;
+    overflow: hidden;
+    display: flex;
+    gap: 4px;
+    border-radius: 8px;
+}
+
+.tabItem{
+    display: block;
+    width: auto;
+    height: auto;
+    padding: 0 48px;
+    background-color: var(--lg-color);
+    color: var(--gray-color);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.tabItem.selected{
+    background-color: var(--black-color);
+    color: var(--white-color);
+}
