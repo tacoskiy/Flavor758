@@ -6,7 +6,6 @@ from . import views
 router = DefaultRouter()
 router.register(r'shops',ShopViewSet)
 router.register(r'shop-images', ShopImageViewSet)
-
 router.register(r'comments',CommentViewSet)
 
 urlpatterns = [

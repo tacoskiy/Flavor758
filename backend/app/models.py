@@ -33,8 +33,8 @@ class Comment(models.Model):
     def __str__(self):
         return self.id
     
-    class CustomUser(AbstractUser):
-        id = models.IntegerField("ID", primary_key=True)
-        name = models.CharField("アカウント名" , max_length=100)
-        password = models.CharField("パスワード", max_length=100)
-        profilePic = models.ImageField("プロフィール画像", upload_to='profile_images/', null=True, blank=True)
+    # class CustomUser(AbstractUser):
+    #     id = models.IntegerField("ID", primary_key=True)
+    #     name = models.CharField("アカウント名" , max_length=100)
+    #     password = models.CharField("パスワード", max_length=100)
+    #     profilePic = models.ImageField("プロフィール画像", upload_to='profile_images/', null=True, blank=True)

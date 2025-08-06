@@ -35,7 +35,7 @@ DEBUG = env.bool('DJANGO_DEBUG', default=True)
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
-AUTH_USER_MODEL = 'accounts.CustomUser'
+# AUTH_USER_MODEL = 'accounts.CustomUser'
 
 # Application definition
 
@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'app',
     'rest_framework',
     "corsheaders",
+    'django_filters',
 ]
 
 MIDDLEWARE = [
@@ -63,6 +64,10 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'config.urls'
+
+REST_FRAMEWORK = {
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
+}
 
 TEMPLATES = [
     {
