@@ -1,11 +1,13 @@
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from .views import ShopViewSet, ShopImageViewSet
+from .views import ShopViewSet, ShopImageViewSet,CommentViewSet
 from . import views
 
 router = DefaultRouter()
 router.register(r'shops',ShopViewSet)
 router.register(r'shop-images', ShopImageViewSet)
+
+router.register(r'comments',CommentViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
