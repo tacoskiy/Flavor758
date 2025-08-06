@@ -242,3 +242,6 @@ yarn-error.log*
 
 # Optional: docker volume mounts（ホストとコンテナの差分対策）
 container-frontend/node_modules
+
+# media for django ImageField
+backend/media/images/
