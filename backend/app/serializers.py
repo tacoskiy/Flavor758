@@ -9,4 +9,4 @@ class ShopSerializer(serializers.ModelSerializer):
 class ShopImageSerializer(serializers.ModelSerializer):
     class Meta:
         model = ShopImage
-        fields =' __all__ '
+        fields ='__all__ '

@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import styles from './MapBox.module.css';
@@ -18,6 +18,7 @@ const markerRefs: {
 function MapBox(){
     const mapContainerRef = useRef<HTMLDivElement | null>(null);
     const mapRef = useRef<mapboxgl.Map | null>(null);
+    const markerThreshold = 180;
 
     useEffect(() => {
         if(mapRef.current || !mapContainerRef.current) return;
@@ -66,7 +67,7 @@ function MapBox(){
             center: [136.8815, 35.1709],
             zoom: 17,
             minZoom: 16,
-            maxZoom: 18,
+            maxZoom: 19,
             maxBounds: [
                 [136.8650, 35.1574],
                 [136.8980, 35.1844]
@@ -108,31 +109,45 @@ function MapBox(){
                 }
             });
 
-            const locationData = [
-                { lng: 136.8842, lat: 35.1743, id: 1 },
-                { lng: 136.8775, lat: 35.1679, id: 2 },
-                { lng: 136.8897, lat: 35.1702, id: 3 },
-                { lng: 136.8829, lat: 35.1765, id: 4 },
-                { lng: 136.8913, lat: 35.1671, id: 5 },
-                { lng: 136.8801, lat: 35.1686, id: 6 },
-                { lng: 136.8865, lat: 35.1724, id: 7 },
-                { lng: 136.8798, lat: 35.1758, id: 8 },
-                { lng: 136.8882, lat: 35.1695, id: 9 },
-                { lng: 136.8821, lat: 35.1707, id: 10 },
-            ];
+            // const locationData = [
+            //     { lng: 136.8842, lat: 35.1743, id: 1 },
+            //     { lng: 136.8775, lat: 35.1679, id: 2 },
+            //     { lng: 136.8897, lat: 35.1702, id: 3 },
+            //     { lng: 136.8829, lat: 35.1765, id: 4 },
+            //     { lng: 136.8913, lat: 35.1671, id: 5 },
+            //     { lng: 136.8801, lat: 35.1686, id: 6 },
+            //     { lng: 136.8865, lat: 35.1724, id: 7 },
+            //     { lng: 136.8798, lat: 35.1758, id: 8 },
+            //     { lng: 136.8882, lat: 35.1695, id: 9 },
+            //     { lng: 136.8821, lat: 35.1707, id: 10 },
+            // ];
+            type ShopLocation = {
+                id: number;
+                lng: number;
+                lat: number;
+                shopName: string;
+                category: string;
+                discription: string;
+                coverImage: string;
+            };
 
-            locationData.forEach(({lng, lat, id}) => {
-                const marker = document.createElement('div');
+            fetch('http://localhost:8000/app/shops/')
+            .then((res) => res.json())
+            .then((json : ShopLocation[]) => {
+                json.forEach(({lng, lat, id, shopName, category, discription, coverImage}) => {
+                    const marker = document.createElement('div');
 
-                const renderRoot = createRoot(marker);
-                const ref = React.createRef<MarkerContentHandle>();
-                renderRoot.render(<MarkerContent ref={ref} name={String(lng)}/>);
-                
-                markerRefs.push({el: marker, ref:ref});
+                    const renderRoot = createRoot(marker);
+                    const ref = React.createRef<MarkerContentHandle>();
+                    renderRoot.render(<MarkerContent ref={ref} name={shopName} discription={discription} imgSrc={coverImage}/>);
+                    console.log('Image URL:', coverImage);
+                    
+                    markerRefs.push({el: marker, ref:ref});
 
-                new mapboxgl.Marker(marker)
-                .setLngLat([lng, lat])
-                .addTo(map); 
+                    new mapboxgl.Marker(marker).setLngLat([lng, lat]).addTo(map);
+                });
+            }).catch(error => {
+                console.error('Failed to fetch shop data:', error);
             });
         });
 
@@ -140,7 +155,7 @@ function MapBox(){
             adjustMarker();
         })
 
-        function adjustMarker(threshold = 180){
+        function adjustMarker(threshold = markerThreshold){
             const positions: {x:number; y:number; refObj: typeof markerRefs[number]}[] = [];
 
             markerRefs.forEach((refObj) => {

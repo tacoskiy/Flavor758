@@ -3,7 +3,10 @@
     z-index: 1000;
     width: 100%;
     height: auto;
-    padding: 24px;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
 }
 
 .mainHeader{
@@ -14,4 +17,26 @@
     border-radius: 12px;
     display: flex;
     justify-content: space-between;
+    align-items: center;
+}
+
+.appIcon{
+    padding: 0 20px;
+}
+
+.subHeader{
+    width: 100%;
+    display: flex;
+    gap: 8px;
+}
+
+.subHeader .tab, .subHeader .search{
+    width: auto;
+    background-color: var(--white-color);
+    border-radius: 12px;
+    padding: 4px;
+}
+
+.subHeader .search{
+    width: 100%;
 }
