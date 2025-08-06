@@ -19,3 +19,15 @@ class ShopImage(models.Model):
 
     def __str__(self):
         return f"Image of {self.shop.shopName}"
+    
+
+class Comment(models.Model):
+    
+    id = models.IntegerField("ID", primary_key=True)
+    title=models.CharField("コメントタイトル",max_length=200)
+    content=models.TextField("コメント本文")
+    image=models.ImageField("添付写真",upload_to='comments/', null=True, blank=True)
+    ratingStar=models.IntegerField("星")
+
+    def __str__(self):
+        return self.id
