@@ -127,19 +127,19 @@ function MapBox(){
                 lat: number;
                 shopName: string;
                 category: string;
-                discription: string;
+                description: string;
                 coverImage: string;
             };
 
             fetch('http://localhost:8000/app/shops/')
             .then((res) => res.json())
             .then((json : ShopLocation[]) => {
-                json.forEach(({lng, lat, id, shopName, category, discription, coverImage}) => {
+                json.forEach(({lng, lat, id, shopName, category, description, coverImage}) => {
                     const marker = document.createElement('div');
 
                     const renderRoot = createRoot(marker);
                     const ref = React.createRef<MarkerContentHandle>();
-                    renderRoot.render(<MarkerContent ref={ref} name={shopName} discription={discription} imgSrc={coverImage}/>);
+                    renderRoot.render(<MarkerContent ref={ref} name={shopName} description={description} imgSrc={coverImage}/>);
                     console.log('Image URL:', coverImage);
                     
                     markerRefs.push({el: marker, ref:ref});

@@ -5,7 +5,7 @@ import Image from 'next/image';
 
 interface MarkerContentProps{
     name: string;
-    discription: string;
+    description: string;
     imgSrc: string;
 }
 
@@ -14,7 +14,7 @@ export type MarkerContentHandle = {
     shrink: boolean;
 }
 
-const MarkerContent = forwardRef<MarkerContentHandle, MarkerContentProps>(({name, discription, imgSrc}, ref) => {
+const MarkerContent = forwardRef<MarkerContentHandle, MarkerContentProps>(({name, description, imgSrc}, ref) => {
     const [shrink, setShrink] = useState(false);
 
     useImperativeHandle(ref, () => ({
@@ -27,7 +27,7 @@ const MarkerContent = forwardRef<MarkerContentHandle, MarkerContentProps>(({name
             <div className={styles.card}>
                 <div className={styles.content}>
                     <h3 className={styles.shopName}>{name}</h3>
-                    <p className={styles.shopDescription}>{discription}</p>
+                    <p className={styles.shopDescription}>{description}</p>
                 </div>
                 <div className={styles.dim}/>
                 <img className={styles.image} src={imgSrc} alt="coverImg"/>

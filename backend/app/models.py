@@ -5,7 +5,7 @@ from django.contrib.auth.models import AbstractUser
 class Shop(models.Model):
     shopName = models.CharField(max_length=255)
     coverImage = models.ImageField(upload_to='images/')
-    discription = models.CharField(max_length=500)
+    description = models.CharField(max_length=500)
     category = models.CharField(max_length = 100, null=True, blank=True)
     lng = models.FloatField(default=136.8815)
     lat = models.FloatField(default=35.1709)
