@@ -7,6 +7,7 @@ interface MarkerContentProps{
     name: string;
     description: string;
     imgSrc: string;
+    zIndex: number;
 }
 
 export type MarkerContentHandle = {
@@ -14,7 +15,7 @@ export type MarkerContentHandle = {
     shrink: boolean;
 }
 
-const MarkerContent = forwardRef<MarkerContentHandle, MarkerContentProps>(({name, description, imgSrc}, ref) => {
+const MarkerContent = forwardRef<MarkerContentHandle, MarkerContentProps>(({name, description, imgSrc, zIndex}, ref) => {
     const [shrink, setShrink] = useState(false);
 
     useImperativeHandle(ref, () => ({
@@ -23,7 +24,7 @@ const MarkerContent = forwardRef<MarkerContentHandle, MarkerContentProps>(({name
     }));
 
     return(
-        <div className={classNames(styles.markerContent, shrink ? styles.shrink : '')}>
+        <div className={classNames(styles.markerContent, shrink ? styles.shrink : '')} style={{zIndex: zIndex}}>
             <div className={styles.card}>
                 <div className={styles.content}>
                     <h3 className={styles.shopName}>{name}</h3>

@@ -7,14 +7,14 @@ interface CommonButtonProps {
     content?: string;
     color: string;
     bgColor?: boolean;
-    onPress?: Function;
+    onClick?: () => void;
     width?: number;
     height?: number;
 }
 
-function CommonButton({iconType, content, color, bgColor = true, onPress, width = content ? 120 : 48, height = 48}:CommonButtonProps){
+function CommonButton({iconType, content, color, bgColor = true, onClick, width = content ? 120 : 48, height = 48}:CommonButtonProps){
     return(
-        <a
+        <button
             className={classNames(styles.commonButton, bgColor ? styles.bgColor : '')}
             style={{
                 width,
@@ -22,10 +22,11 @@ function CommonButton({iconType, content, color, bgColor = true, onPress, width 
                 color: bgColor ? `var(${color})` : 'var(--white-color)',
                 backgroundColor: bgColor ? 'var(--lg-color)' : `var(${color})`
             }}
+            onClick={onClick}
         >
             <CommonIcon type={iconType} size='18px' color={bgColor ? color : '--white-color'}/>
             {content && <span>{content}</span>}
-        </a>
+        </button>
     );
 }
 
