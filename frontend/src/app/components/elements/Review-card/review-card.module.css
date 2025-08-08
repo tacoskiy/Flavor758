@@ -1,0 +1,85 @@
+.card {
+    display: flex;
+    background-color: #ffffff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    margin-bottom: 16px; /* 縦に並べた時の間隔 */
+    max-width: 600px; /* カードの最大幅 */
+  }
+  
+  .imageContainer {
+    position: relative;
+    width: 150px; /* 画像の固定幅 */
+    height: 150px; /* 画像の固定高さ */
+    flex-shrink: 0;
+  }
+  
+  .image {
+    border-radius: 12px 0 0 12px;
+  }
+  
+  .bookmark {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: 32px;
+    height: 32px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    cursor: pointer;
+  }
+  
+  .bookmarkIcon {
+    color: #666;
+    font-size: 18px; /* 例としてfont-sizeを使用 */
+  }
+  
+  .content {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .title {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 4px;
+  }
+  
+  .description {
+    font-size: 14px;
+    color: #888888;
+    margin-bottom: 8px;
+  }
+  
+  .ratingContainer {
+    display: flex;
+    align-items: center;
+  }
+  
+  .stars {
+    display: flex;
+    margin-right: 8px;
+  }
+  
+  .star {
+    color: #ffb700;
+    font-size: 18px;
+    margin-right: 2px;
+  }
+  
+  .emptyStar {
+    color: #cccccc;
+  }
+  
+  .ratingValue {
+    font-size: 14px;
+    color: #666666;
+    font-weight: bold;
+  }
