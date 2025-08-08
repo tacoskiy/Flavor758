@@ -1,0 +1,40 @@
+.menu{
+    background-color: var(--white-color);
+    color: var(--black-color);
+    padding: 4px;
+    border-radius: 12px;
+    width: 240px;
+    height: calc(100vh - 24px);
+    position: absolute;
+    right: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    gap: 4px;
+    transform: translateX(calc(100% + 12px));
+    transition: all .3s;
+}
+
+.menu.open{
+    transform: translateX(0%);
+}
+
+.account{
+    background-color: var(--lg-color);
+    padding: 24px;
+    display: block;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+}
+
+.account .profilePic{
+    width: 48px;
+    aspect-ratio: 1/1;
+    height: auto;
+    background-color: var(--black-color);
+    display: block;
+    border-radius: 999px;
+}

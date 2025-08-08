@@ -35,6 +35,8 @@ DEBUG = env.bool('DJANGO_DEBUG', default=True)
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
+AUTH_USER_MODEL = 'accounts.User'
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -45,8 +47,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'app',
+    'accounts',
     'rest_framework',
     "corsheaders",
+    'django_filters',
+    'rest_framework_simplejwt',
 ]
 
 MIDDLEWARE = [
@@ -61,6 +66,13 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'config.urls'
+
+REST_FRAMEWORK = {
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'accounts.authentication.CookieAuth',
+    ),
+}
 
 TEMPLATES = [
     {
@@ -149,3 +161,11 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "http://10.79.14.138:3000",
 ]
+
+from corsheaders.defaults import default_headers
+
+CORS_ALLOW_HEADERS = list(default_headers) + [
+    "authorization",
+]
+
+CORS_ALLOW_CREDENTIALS = True

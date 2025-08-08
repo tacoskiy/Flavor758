@@ -75,6 +75,7 @@ function MapBox(){
             pitch: 70,
             antialias: true,
         });
+        map.touchZoomRotate.disableRotation();
 
         mapRef.current = map;
 
@@ -127,20 +128,26 @@ function MapBox(){
                 lat: number;
                 shopName: string;
                 category: string;
-                discription: string;
+                description: string;
                 coverImage: string;
             };
 
-            fetch('http://localhost:8000/app/shops/')
+            fetch('http://localhost:8000/api/shops/')
             .then((res) => res.json())
             .then((json : ShopLocation[]) => {
-                json.forEach(({lng, lat, id, shopName, category, discription, coverImage}) => {
+                const sorted = [...json].sort((a, b) => a.lat - b.lat);
+
+                sorted.forEach(({lng, lat, id, shopName, category, description, coverImage}, index) => {
                     const marker = document.createElement('div');
+
+                    const zIndex = sorted.length - index;
+
+                    marker.style.position = 'absolute'; // 必須：z-indexを有効にするため
+                    marker.style.zIndex = zIndex.toString();
 
                     const renderRoot = createRoot(marker);
                     const ref = React.createRef<MarkerContentHandle>();
-                    renderRoot.render(<MarkerContent ref={ref} name={shopName} discription={discription} imgSrc={coverImage}/>);
-                    console.log('Image URL:', coverImage);
+                    renderRoot.render(<MarkerContent zIndex={zIndex} ref={ref} name={shopName} description={description} imgSrc={coverImage}/>);
                     
                     markerRefs.push({el: marker, ref:ref});
 

@@ -7,6 +7,12 @@
     display: flex;
     flex-direction: column;
     gap: 8px;
+    overflow: visible;
+}
+
+.appHeader.sticky{
+    position: sticky;
+    background-color: var(--white-color);
 }
 
 .mainHeader{
@@ -39,4 +45,21 @@
 
 .subHeader .search{
     width: 100%;
+}
+
+.dim{
+    width: 100%;
+    height: 100vh;
+    position: absolute;
+    background-color: #00000000;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    transition: all .3s;
+}
+
+.dim.active{
+    background-color: #00000080;
+    pointer-events: all;
+    backdrop-filter: blur(4px);
 }
