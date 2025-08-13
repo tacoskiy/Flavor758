@@ -61,78 +61,80 @@ export default function SubmitShop() {
   }
 
   return (
-    <form onSubmit={handleSubmit} encType="multipart/form-data">
-      <div>
-        <label>Shop Name</label>
-        <input
-          type="text"
-          value={shopName}
-          onChange={(e) => setShopName(e.target.value)}
-          required
-        />
-      </div>
+    <section>
+      <form onSubmit={handleSubmit} encType="multipart/form-data">
+        <div>
+          <label>Shop Name</label>
+          <input
+            type="text"
+            value={shopName}
+            onChange={(e) => setShopName(e.target.value)}
+            required
+          />
+        </div>
 
-      <div>
-        <label>Description</label>
-        <textarea
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-          required
-        />
-      </div>
+        <div>
+          <label>Description</label>
+          <textarea
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            required
+          />
+        </div>
 
-      <div>
-        <label>Category</label>
-        <input
-          type="text"
-          value={category}
-          onChange={(e) => setCategory(e.target.value)}
-        />
-      </div>
+        <div>
+          <label>Category</label>
+          <input
+            type="text"
+            value={category}
+            onChange={(e) => setCategory(e.target.value)}
+          />
+        </div>
 
-      <div>
-        <label>Latitude</label>
-        <input
-          type="number"
-          step="any"
-          value={lat}
-          onChange={(e) => setLat(e.target.value)}
-          required
-        />
-      </div>
+        <div>
+          <label>Latitude</label>
+          <input
+            type="number"
+            step="any"
+            value={lat}
+            onChange={(e) => setLat(e.target.value)}
+            required
+          />
+        </div>
 
-      <div>
-        <label>Longitude</label>
-        <input
-          type="number"
-          step="any"
-          value={lng}
-          onChange={(e) => setLng(e.target.value)}
-          required
-        />
-      </div>
+        <div>
+          <label>Longitude</label>
+          <input
+            type="number"
+            step="any"
+            value={lng}
+            onChange={(e) => setLng(e.target.value)}
+            required
+          />
+        </div>
 
-      <div>
-        <label>Cover Image</label>
-        <input
-          type="file"
-          accept="image/*"
-          onChange={handleCoverChange}
-          required
-        />
-      </div>
+        <div>
+          <label>Cover Image</label>
+          <input
+            type="file"
+            accept="image/*"
+            onChange={handleCoverChange}
+            required
+          />
+        </div>
 
-      <div>
-        <label>Shop Images (multiple)</label>
-        <input
-          type="file"
-          multiple
-          accept="image/*"
-          onChange={handleImageChange}
-        />
-      </div>
+        <div>
+          <label>Shop Images (multiple)</label>
+          <input
+            type="file"
+            multiple
+            accept="image/*"
+            onChange={handleImageChange}
+          />
+        </div>
 
-      <button type="submit">Add Shop</button>
-    </form>
+        <button type="submit">Add Shop</button>
+      </form>
+    </section>
   )
 }

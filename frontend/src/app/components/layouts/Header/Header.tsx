@@ -31,15 +31,14 @@ function Header(){
                         <CommonButton iconType='menu' color='--main-color' onClick={() => setIsMenuOpen(true)}/>
                     </div>
                     <div className={styles.subHeader}>
-                        <div className={styles.search}>
-                            <SearchBar />
-                        </div>
                         <div className={styles.tab}>
                             <TabSwitch />
                         </div>
                     </div>
                     <div className={classNames(styles.dim, isMenuOpen ? styles.active : '')} onClick={() => setIsMenuOpen(false)}/>
-                    <Menu isOpen={isMenuOpen} closeButtonClick={() => setIsMenuOpen(false)}/>
+                    <div className={classNames(styles.menuWrapper, isMenuOpen ? styles.active : '')}>
+                        <Menu isOpen={isMenuOpen} closeButtonClick={() => setIsMenuOpen(false)}/>
+                    </div>
                 </>
             }
         </header>

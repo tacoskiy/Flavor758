@@ -1,6 +1,5 @@
 from rest_framework import serializers
-from .models import Shop , ShopImage
-from .models import Comment
+from .models import Review, Shop
 from accounts.models import User
 
 class ShopSimpleSerializer(serializers.ModelSerializer):
@@ -13,36 +12,33 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         fields = ['id', 'username']
 
-class CommentSerializer(serializers.ModelSerializer):
-    user = UserSerializer(read_only=True)
-    shop = ShopSimpleSerializer(read_only=True)
-
-    class Meta:
-        model = Comment
-        fields = ['id', 'title', 'content', 'image', 'ratingStar', 'user', 'shop']
-
-class ShopImageSerializer(serializers.ModelSerializer):
-    shop = ShopSimpleSerializer(read_only=True)
-
-    class Meta:
-        model = ShopImage
-        fields = ['id', 'img', 'caption', 'shop']
-
 class ShopSerializer(serializers.ModelSerializer):
-    comments = CommentSerializer(many=True, read_only=True)
-    shopImages = ShopImageSerializer(many=True, read_only=True)
-
     class Meta:
         model = Shop
         fields = '__all__'
     
     def create(self, validated_data):
         request = self.context['request']
-        shopImages = request.FILES.getlist('shopImages')
 
         shop = Shop.objects.create(**validated_data)
-
-        for image in shopImages:
-            ShopImage.objects.create(shop=shop, img=image)
         
         return shop
+
+class ReviewSerializer(serializers.ModelSerializer):
+    user = serializers.StringRelatedField(read_only=True)  # ユーザー名を返す
+    shop = serializers.StringRelatedField(read_only=True)  # 店舗名を返す
+
+    class Meta:
+        model = Review
+        fields = ['id', 'shop', 'user', 'ratingStar', 'comment', 'created_at']
+
+class ReviewCreateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Review
+        fields = ['ratingStar', 'comment']
+
+    def create(self, validated_data):
+        request = self.context['request']
+        shop = validated_data.pop('shop')
+        review = Review.objects.create(user=request.user, shop=shop, **validated_data)
+        return review

@@ -3,3 +3,22 @@
     align-items: center;
     margin-top: 80px;
 }
+
+.chipWrapper{
+    display: flex;
+    gap: 8px;
+    overflow-y: visible;
+    overflow-x: scroll;
+    padding: 4px 12px;
+}
+
+.chipWrapper::-webkit-scrollbar {
+    display: none;
+}
+
+.cards{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 12px;
+}

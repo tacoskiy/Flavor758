@@ -18,7 +18,7 @@ const markerRefs: {
 function MapBox(){
     const mapContainerRef = useRef<HTMLDivElement | null>(null);
     const mapRef = useRef<mapboxgl.Map | null>(null);
-    const markerThreshold = 180;
+    const markerThreshold = 250;
 
     useEffect(() => {
         if(mapRef.current || !mapContainerRef.current) return;
@@ -66,7 +66,7 @@ function MapBox(){
             },
             center: [136.8815, 35.1709],
             zoom: 17,
-            minZoom: 16,
+            minZoom: 15,
             maxZoom: 19,
             maxBounds: [
                 [136.8650, 35.1574],

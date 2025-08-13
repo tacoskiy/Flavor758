@@ -5,7 +5,7 @@
     overflow: hidden;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
     margin-bottom: 16px; /* 縦に並べた時の間隔 */
-    max-width: 600px; /* カードの最大幅 */
+    width: 100%;
   }
   
   .imageContainer {
@@ -17,6 +17,9 @@
   
   .image {
     border-radius: 12px 0 0 12px;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* 画像の切り抜き */
   }
   
   .bookmark {
@@ -25,19 +28,20 @@
     left: 10px;
     width: 32px;
     height: 32px;
-    background-color: rgba(255, 255, 255, 0.8);
+    background-color: var(--lg-color);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     z-index: 10;
     cursor: pointer;
+    border: none;
   }
-  
-  .bookmarkIcon {
-    color: #666;
-    font-size: 18px; /* 例としてfont-sizeを使用 */
+
+  .bookmark.saved{
+    background-color: var(--main-color);
   }
+
   
   .content {
     padding: 16px;

@@ -29,4 +29,4 @@ return (
 );
 };
 
-export default Mrd;ainCa
+export default MainCard;

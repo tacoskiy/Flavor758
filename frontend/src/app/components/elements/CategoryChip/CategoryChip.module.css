@@ -1,0 +1,31 @@
+.card {
+  flex-shrink: 0; /* カードが縮まないようにする */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: auto; 
+  height: auto;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px; /* 角丸の半径 */
+  background-color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  padding: 18px 36px; /* 内側の余白 */
+}
+
+.card.selected {
+  background-color: #f0f0f0; /* 選択されたときの背景色 */
+  border-color: #6200ea; /* 選択されたときの枠線色 */
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.text {
+  font-size: 14px;
+  font-weight: 600;
+  color: #666666;
+}

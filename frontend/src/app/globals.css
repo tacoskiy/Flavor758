@@ -19,7 +19,8 @@
 html,
 body {
   max-width: 100vw;
-  overflow-x: hidden;
+  position: relative;
+  background-color: var(--lg-color);
 }
 
 body {
@@ -45,4 +46,12 @@ a {
   html {
     color-scheme: dark;
   }
+}
+
+section{
+  padding-top: 180px;
+}
+
+main {
+  background-color: var(--lg-color);
 }
